@@ -22,7 +22,7 @@ namespace Palindrome.Tests
         public void TestPalindrome3ShouldPass()
         {
             PalindromChecker newchecker = new PalindromChecker();
-            Assert.IsTrue(newchecker.CheckPalindrome("racecar"));
+            Assert.IsTrue(newchecker.CheckPalindrome("racecaR"));
         }
         [TestMethod]
         public void TestPalindrome4ShouldFail()

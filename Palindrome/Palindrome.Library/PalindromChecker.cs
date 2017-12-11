@@ -24,7 +24,7 @@ namespace Palindrome.Library
             Array.Reverse(inputarr);
             string inputstr = new string(inputarr);
 
-            if (str == inputstr)
+            if (str.Equals(inputstr, StringComparison.InvariantCultureIgnoreCase))
             {
                 return true;
             }
