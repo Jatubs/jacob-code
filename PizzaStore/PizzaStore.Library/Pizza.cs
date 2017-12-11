@@ -24,45 +24,61 @@ namespace PizzaStore.Library
         private int size = 2;
         private List<int> toppingslist;
         private double price;
-        private string ordertime;
+        private int orderhour;
+        private int orderminutes;
 
         public Pizza()
         {
-            
+            Enum.GetNames(typeof(Crusts)).ToString();
             crusttype = 1;
             size = 2;
             toppingslist = new List<int> { 0 };
             price = 9.99;
-            ordertime = DateTime.Now.ToString("h:mm:ss tt");
+            orderhour = DateTime.Now.Hour;
+            orderminutes = DateTime.Now.Minute;
            
         }
 
-        public Pizza(int crust, int pizzasize, double priceval, string ordertimeval)
+        public Pizza(int crust, int pizzasize, double priceval)
         {
             crusttype = crust;
             size = pizzasize;
             price = priceval;
-            ordertime = ordertimeval;
         }
 
         public List<string> GetListOfToppings()
         {
             List<string> returnval = new List<string> { "Cheese", "Sausage", "Pepperoni", "Bacon", "Chicken", "Beef", "GreenPeppers", "BananaPeppers", "Onions", "Mushrooms", "Olives" };
-
+            string[] temp = Enum.GetNames(typeof(Toppings));
+            
+            for (int i = 0; i < temp.Length; i++)
+            {
+                returnval[i] = temp[i];
+            }
             return returnval;
         }
 
         public List<string> GetListOfSizes()
         {
             List<string> returnval = new List<string> { "Personal", "Small", "Medium", "Large", "ExtraLarge" };
+            string[] temp = Enum.GetNames(typeof(Sizes));
 
+            for (int i = 0; i < temp.Length; i++)
+            {
+                returnval[i] = temp[i];
+            }
             return returnval;
         }
 
         public List<string> GetListOfCrusts()
         {
             List<string> returnval = new List<string> { "Thin", "Pan", "Stuffed" };
+            string[] temp = Enum.GetNames(typeof(Crusts));
 
+            for (int i = 0; i < temp.Length; i++)
+            {
+                returnval[i] = temp[i];
+            }
             return returnval;
         }
 
@@ -106,14 +122,13 @@ namespace PizzaStore.Library
             return price;
         }
 
-        public void SetOrderTime(string type)
+        public int GetOrderHour()
         {
-            ordertime = type;
+            return orderhour;
         }
-
-        public string GetOrderTime()
+        public int GetOrderMinutes()
         {
-            return ordertime;
+            return orderminutes;
         }
     }
 }

@@ -8,18 +8,21 @@ namespace PizzaStore.Library
 {
     public class Customer
     {
+        
         private string Name;
         private string Address;
         private List<Pizza> history;
         private Location chosenlocation;
         private static List<Order> currentorders;
-
+        bool haschosen;
+        
         public Customer()
         {
             Name = "Balls Mahoney";
             Address = "1234 NoPizza Blvd";
             history = new List<Pizza>();
             currentorders = new List<Order>();
+            haschosen = false;
 
         }
         public List<Order> getorders()
@@ -69,6 +72,15 @@ namespace PizzaStore.Library
         }
         public void SetLocation(Location locval)
         {
+            if (!haschosen)
+            {
+                chosenlocation = locval;
+                haschosen = true;
+            }
+            if (DateTime.Now.Hour >= currentorders[0].GetOrderHour() + 6 && DateTime.Now.Minute >= currentorders[0].GetOrderMinutes())
+            {
+
+            }
             chosenlocation = locval;
         }
         public Location GetLocation()

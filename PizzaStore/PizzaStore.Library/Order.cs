@@ -11,11 +11,15 @@ namespace PizzaStore.Library
     {
         private List<Pizza> pizzastoorder;
         private double TotalPrice;
+        private int orderhour;
+        private int orderminutes;
 
         public Order()
         {
             pizzastoorder = new List<Pizza>();
             TotalPrice = 0.0;
+            orderhour = DateTime.Now.Hour;
+            orderminutes = DateTime.Now.Minute;
         }
 
         public List<Pizza> GetPizzasInOrder()
@@ -42,6 +46,14 @@ namespace PizzaStore.Library
         public double GetTotalPrice()
         {
             return TotalPrice;
+        }
+        public int GetOrderHour()
+        {
+            return orderhour;
+        }
+        public int GetOrderMinutes()
+        {
+            return orderminutes;
         }
         
 
