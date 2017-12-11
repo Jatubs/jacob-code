@@ -10,15 +10,15 @@ namespace Palindrome.Library
             str = input.Replace(" ", String.Empty);
             str = str.Replace(",", String.Empty);
             str = str.Replace(".", String.Empty);
-            str = str.Replace("@", String.Empty);
-            str = str.Replace("#", String.Empty);
-            str = str.Replace("$", String.Empty);
-            str = str.Replace("%", String.Empty);
-            str = str.Replace("^", String.Empty);
-            str = str.Replace("&", String.Empty);
-            str = str.Replace("*", String.Empty);
-            str = str.Replace("(", String.Empty);
-            str = str.Replace(")", String.Empty);
+            //str = str.Replace("@", String.Empty);
+            //str = str.Replace("#", String.Empty);
+            //str = str.Replace("$", String.Empty);
+            //str = str.Replace("%", String.Empty);
+            //str = str.Replace("^", String.Empty);
+            //str = str.Replace("&", String.Empty);
+            //str = str.Replace("*", String.Empty);
+            //str = str.Replace("(", String.Empty);
+            //str = str.Replace(")", String.Empty);
 
             char[] inputarr = str.ToCharArray();
             Array.Reverse(inputarr);
