@@ -34,6 +34,7 @@ namespace PizzaStore.Library
             toppingslist = new List<int> { 0 };
             price = 9.99;
             ordertime = DateTime.Now.ToString("h:mm:ss tt");
+           
         }
 
         public Pizza(int crust, int pizzasize, double priceval, string ordertimeval)
