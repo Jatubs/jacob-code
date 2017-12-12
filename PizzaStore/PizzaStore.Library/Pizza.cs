@@ -26,6 +26,7 @@ namespace PizzaStore.Library
         private double price;
         private int orderhour;
         private int orderminutes;
+        private string pizzaname;
 
         public Pizza()
         {
@@ -36,7 +37,7 @@ namespace PizzaStore.Library
             price = 9.99;
             orderhour = DateTime.Now.Hour;
             orderminutes = DateTime.Now.Minute;
-           
+            pizzaname = "Default";
         }
 
         public Pizza(int crust, int pizzasize, double priceval)
@@ -44,6 +45,16 @@ namespace PizzaStore.Library
             crusttype = crust;
             size = pizzasize;
             price = priceval;
+        }
+
+        public void SetName(string type)
+        {
+            pizzaname = type;
+        }
+
+        public string GetName()
+        {
+            return pizzaname;
         }
 
         public List<string> GetListOfToppings()

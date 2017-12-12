@@ -85,19 +85,26 @@ namespace PizzaStore.Test
             Pizza Pepperoni = new Pizza();
             Order neworder = new Order();
 
-
             Pepperoni.AddTopping(2);
             Pepperoni.AddTopping(0);
             Pepperoni.SetPrice(12.99);
             Pepperoni.SetCrust(0);
             Pepperoni.SetSize(1);
-
-            newloc.AddInventory(Pepperoni, 100);
+            Pepperoni.SetName("Pepperoni");
+            newloc.AddInventory(Pepperoni.GetName(), 100);
             neworder.AddPizzatoOrder(Pepperoni);
             neworder.AddPizzatoOrder(Pepperoni);
             neworder.AddPizzatoOrder(Pepperoni);
 
             Assert.IsTrue(newloc.VerifySale(neworder));
+            Pizza newpizza = new Pizza();
+            newpizza.AddTopping(4);
+            newpizza.SetName("Test");
+            Order neworder2 = new Order();
+
+            neworder2.AddPizzatoOrder(newpizza);
+
+            Assert.IsFalse(newloc.VerifySale(neworder2));
         }
     }
 }

@@ -9,20 +9,20 @@ namespace PizzaStore.Library
     public class Location
     {
         private List<Order> recordofsales;
-        private SortedDictionary<Pizza, int> inventory;
+        private SortedDictionary<String, int> inventory;
         private string Address;
 
         public Location()
         {
             Address = "1234 Loadsapizza Avenue";
             recordofsales = new List<Order>();
-            inventory = new SortedDictionary<Pizza, int>();
+            inventory = new SortedDictionary<String, int>();
         }
         public List<Order> GetSales()
         {
             return recordofsales;
         }
-        public SortedDictionary<Pizza,int> GetInventory()
+        public SortedDictionary<String,int> GetInventory()
         {
             return inventory;
         }
@@ -43,10 +43,13 @@ namespace PizzaStore.Library
             int pizzasaddedcounter = 0;
             for (int i = 0; i < saleval.GetPizzasInOrder().Count; i++)
             {
-                if (inventory[saleval.GetPizzasInOrder()[i]] >= 1)
+                if (inventory.ContainsKey(saleval.GetPizzasInOrder()[i].GetName()))
                 {
-                    AddSale(saleval);
-                    pizzasaddedcounter += 1;
+                    if (inventory[saleval.GetPizzasInOrder()[i].GetName()] >= 1)
+                    {
+                        AddSale(saleval);
+                        pizzasaddedcounter += 1;
+                    }
                 }
             }
             if (pizzasaddedcounter == saleval.GetPizzasInOrder().Count)
@@ -55,9 +58,9 @@ namespace PizzaStore.Library
             }
             return false;
         }
-        public void AddInventory(Pizza typeofpizza, int quantity)
+        public void AddInventory(String pizzaname, int quantity)
         {
-            inventory.Add(typeofpizza, quantity);
+            inventory.Add(pizzaname, quantity);
         }
     }
 }
