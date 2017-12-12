@@ -77,11 +77,40 @@ namespace PizzaStore.Library
                 chosenlocation = locval;
                 haschosen = true;
             }
-            if (DateTime.Now.Hour >= currentorders[0].GetOrderHour() + 6 && DateTime.Now.Minute >= currentorders[0].GetOrderMinutes())
+            else if (currentorders[0].GetOrderHour() >= 18 && currentorders[0].GetOrderHour() <= 23)
             {
-
+                if (DateTime.Now.Hour + 24 >= currentorders[0].GetOrderHour() + 6 && DateTime.Now.Minute >= currentorders[0].GetOrderMinutes())
+                {
+                    chosenlocation = locval;
+                }
             }
-            chosenlocation = locval;
+            else if (DateTime.Now.Hour >= currentorders[0].GetOrderHour() + 6 && DateTime.Now.Minute >= currentorders[0].GetOrderMinutes())
+            {
+                chosenlocation = locval;
+            }
+        }
+        public bool SetLocationTest(Location locval, int orderhour, int ordermin, int currenthour, int currentmin)
+        {
+            if (!haschosen)
+            {
+                chosenlocation = locval;
+                haschosen = true;
+                return true;
+            }
+            else if (orderhour >= 18 && orderhour <= 23)
+            {
+                if (currenthour + 24 >= orderhour + 6 && currentmin >= ordermin)
+                {
+                    chosenlocation = locval;
+                    return true;
+                }
+            }
+            else if (currenthour >= orderhour + 6 && currentmin >= ordermin)
+            {
+                chosenlocation = locval;
+                return true;
+            }
+            return false;
         }
         public Location GetLocation()
         {

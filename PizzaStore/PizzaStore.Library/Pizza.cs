@@ -14,7 +14,7 @@ namespace PizzaStore.Library
         }
         public enum Sizes
         {
-            Personal, Small, Medium, Large, ExtraLarge
+            Small, Medium, Large
         }
         public enum Toppings
         {

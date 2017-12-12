@@ -38,6 +38,23 @@ namespace PizzaStore.Library
         {
             recordofsales.Add(saleval);
         }
+        public bool VerifySale(Order saleval)
+        {
+            int pizzasaddedcounter = 0;
+            for (int i = 0; i < saleval.GetPizzasInOrder().Count; i++)
+            {
+                if (inventory[saleval.GetPizzasInOrder()[i]] >= 1)
+                {
+                    AddSale(saleval);
+                    pizzasaddedcounter += 1;
+                }
+            }
+            if (pizzasaddedcounter == saleval.GetPizzasInOrder().Count)
+            {
+                return true;
+            }
+            return false;
+        }
         public void AddInventory(Pizza typeofpizza, int quantity)
         {
             inventory.Add(typeofpizza, quantity);
