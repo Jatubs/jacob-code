@@ -8,15 +8,15 @@ namespace PizzaStore.Test
     public class UnitTest1
     {
         [TestMethod]
-        public void OrderWithin6Hours()
+        public void OrderWithin2Hours()
         {
             Pizza newpizza = new Pizza();
             Customer newcus = new Customer();
             Location newloc = new Location();
             newcus.SetLocationTest(newloc, 6, 0, 13, 0);
             List<string> test = newpizza.GetListOfToppings();
-            
-            Assert.IsTrue(newcus.SetLocationTest(newloc, 18, 30, 0, 30));
+
+            Assert.IsTrue(newcus.SetLocationTest(newloc, 18, 30, 20, 30));
             int x = 0;
         }
         [TestMethod]
@@ -76,7 +76,7 @@ namespace PizzaStore.Test
             newcustomer.SetLocation(newloc);
 
             Assert.IsTrue(newcustomer.GetLocation().ToString() != "");
-            
+
         }
         [TestMethod]
         public void LocationNeedsInventory()
@@ -105,6 +105,44 @@ namespace PizzaStore.Test
             neworder2.AddPizzatoOrder(newpizza);
 
             Assert.IsFalse(newloc.VerifySale(neworder2));
+        }
+        [TestMethod]
+        public void CanOnlyHaveOneLocation()
+        {
+            Customer newcustomer = new Customer();
+            Location loc1 = new Location();
+            Location loc2 = new Location();
+            newcustomer.SetLocation(loc1);
+            newcustomer.SetLocation(loc2);
+
+            Assert.IsTrue(newcustomer.GetLocation() == loc2 && newcustomer.GetLocation() != loc1);
+        }
+        [TestMethod]
+        public void HasAccount()
+        {
+            Customer newcustomer = new Customer();
+
+            Assert.IsTrue(newcustomer.GetUsername() != "" && newcustomer.GetPassword() != "");
+        }
+        [TestMethod]
+        public void CanSuggestOrder()
+        {
+            Customer newcustomer = new Customer();
+            Order neworder = new Order();
+            Pizza Pepperoni = new Pizza();
+            Location newloc = new Location();
+
+            Pepperoni.AddTopping(2);
+            Pepperoni.AddTopping(0);
+            Pepperoni.SetPrice(12.99);
+            Pepperoni.SetCrust(0);
+            Pepperoni.SetSize(1);
+            Pepperoni.SetName("Pepperoni");
+            neworder.AddPizzatoOrder(Pepperoni);
+            newcustomer.AddToOrder(neworder);
+            newloc.AddInventory("Pepperoni", 100);
+            newloc.VerifySale(neworder, newcustomer);
+            Assert.IsTrue(newcustomer.suggestOrder() != null);
         }
     }
 }

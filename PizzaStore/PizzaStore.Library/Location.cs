@@ -11,6 +11,7 @@ namespace PizzaStore.Library
         private List<Order> recordofsales;
         private SortedDictionary<String, int> inventory;
         private string Address;
+        private string Name;
 
         public Location()
         {
@@ -34,11 +35,15 @@ namespace PizzaStore.Library
         {
             Address = addval;
         }
-        public void AddSale(Order saleval)
+        public void AddSale(Order saleval, Customer customerval = null)
         {
             recordofsales.Add(saleval);
+            if (customerval != null)
+            {
+                customerval.AddToHistory(saleval);
+            }
         }
-        public bool VerifySale(Order saleval)
+        public bool VerifySale(Order saleval, Customer customerval = null)
         {
             int pizzasaddedcounter = 0;
             for (int i = 0; i < saleval.GetPizzasInOrder().Count; i++)
@@ -47,7 +52,7 @@ namespace PizzaStore.Library
                 {
                     if (inventory[saleval.GetPizzasInOrder()[i].GetName()] >= 1)
                     {
-                        AddSale(saleval);
+                        AddSale(saleval, customerval);
                         pizzasaddedcounter += 1;
                     }
                 }
@@ -61,6 +66,14 @@ namespace PizzaStore.Library
         public void AddInventory(String pizzaname, int quantity)
         {
             inventory.Add(pizzaname, quantity);
+        }
+        public string GetName()
+        {
+            return Name;
+        }
+        public void SetName(string nameval)
+        {
+            Name = nameval;
         }
     }
 }

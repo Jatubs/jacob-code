@@ -11,19 +11,52 @@ namespace PizzaStore.Library
         
         private string Name;
         private string Address;
-        private List<Pizza> history;
+        private List<Order> history;
         private Location chosenlocation;
         private static List<Order> currentorders;
         bool haschosen;
+        private string username;
+        private string password;
         
         public Customer()
         {
             Name = "Balls Mahoney";
             Address = "1234 NoPizza Blvd";
-            history = new List<Pizza>();
+            history = new List<Order>();
             currentorders = new List<Order>();
             haschosen = false;
+            chosenlocation = new Location();
+            chosenlocation.SetAddress("1235 NoPizza Blvd");
+            username = "Default";
+            password = "1234";
 
+        }
+        public Order suggestOrder()
+        {
+            if (history.Count > 0)
+            {
+                return history[0];
+            }
+            else
+            {
+                return null;
+            }
+        }
+        public void SetUsername(string userval)
+        {
+            username = userval;
+        }
+        public string GetUsername()
+        {
+            return username;
+        }
+        public void SetPassword(string passval)
+        {
+            password = passval;
+        }
+        public string GetPassword()
+        {
+            return password;
         }
         public List<Order> getorders()
         {
@@ -62,29 +95,32 @@ namespace PizzaStore.Library
         {
             return Address;
         }
-        public List<Pizza> GetHistory()
+        public List<Order> GetHistory()
         {
             return history;
         }
-        public void AddToHistory(Pizza pizzatoadd)
+        public void AddToHistory(Order pizzatoadd)
         {
             history.Add(pizzatoadd);
         }
         public void SetLocation(Location locval)
         {
-            if (!haschosen)
+            if (!haschosen || currentorders.Count == 0)
             {
                 chosenlocation = locval;
-                haschosen = true;
+                if (currentorders.Count > 0)
+                {
+                    haschosen = true;
+                }
             }
-            else if (currentorders[0].GetOrderHour() >= 18 && currentorders[0].GetOrderHour() <= 23)
+            else if (currentorders[0].GetOrderHour() >= 21 && currentorders[0].GetOrderHour() <= 23)
             {
-                if (DateTime.Now.Hour + 24 >= currentorders[0].GetOrderHour() + 6 && DateTime.Now.Minute >= currentorders[0].GetOrderMinutes())
+                if (DateTime.Now.Hour + 24 >= currentorders[0].GetOrderHour() + 2 && DateTime.Now.Minute >= currentorders[0].GetOrderMinutes())
                 {
                     chosenlocation = locval;
                 }
             }
-            else if (DateTime.Now.Hour >= currentorders[0].GetOrderHour() + 6 && DateTime.Now.Minute >= currentorders[0].GetOrderMinutes())
+            else if (DateTime.Now.Hour >= currentorders[0].GetOrderHour() + 2 && DateTime.Now.Minute >= currentorders[0].GetOrderMinutes())
             {
                 chosenlocation = locval;
             }
@@ -97,15 +133,15 @@ namespace PizzaStore.Library
                 haschosen = true;
                 return true;
             }
-            else if (orderhour >= 18 && orderhour <= 23)
+            else if (orderhour >= 21 && orderhour <= 23)
             {
-                if (currenthour + 24 >= orderhour + 6 && currentmin >= ordermin)
+                if (currenthour + 24 >= orderhour + 2 && currentmin >= ordermin)
                 {
                     chosenlocation = locval;
                     return true;
                 }
             }
-            else if (currenthour >= orderhour + 6 && currentmin >= ordermin)
+            else if (currenthour >= orderhour + 2 && currentmin >= ordermin)
             {
                 chosenlocation = locval;
                 return true;
