@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +19,11 @@ namespace PizzaStore.Library
             Address = "1234 Loadsapizza Avenue";
             recordofsales = new List<Order>();
             inventory = new SortedDictionary<String, int>();
+        }
+        public Location(string Nameval, string addval)
+        {
+            Name = Nameval;
+            Address = addval;
         }
         public List<Order> GetSales()
         {
@@ -75,5 +81,30 @@ namespace PizzaStore.Library
         {
             Name = nameval;
         }
+        //public List<Pizza> FetchInventory(string query)
+        //{
+        //    string connectionstr = "Data Source=jacobsqlweek2.database.windows.net;Initial Catalog=JacobSqlWeek2;User ID=sqladmin;Password=password123!";
+
+
+        //    List<Pizza> pizzas = new List<Pizza>();
+
+        //    SqlCommand cmd = new SqlCommand(query);
+        //    SqlDataReader dr;
+        //    using (SqlConnection con = new SqlConnection(connectionstr))
+        //    {
+        //        con.Open();
+        //        cmd.Connection = con;
+        //        dr = cmd.ExecuteReader();
+        //        foreach (var item in dr)
+        //        {
+        //            //if (dr.Read())
+        //            //{
+        //                pizzas.Add(new Pizza(dr[1].ToString(), dr[2].ToString(), dr[3].ToString(), dr[4].ToString()));
+        //            //}
+        //        }
+        //    }
+
+        //    return pizzas;
+        //}
     }
 }

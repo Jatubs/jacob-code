@@ -2,10 +2,11 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PizzaStore.Library;
 using System.Collections.Generic;
+using PizzaStore.Data;
 namespace PizzaStore.Test
 {
     [TestClass]
-    public class UnitTest1
+    public class PizzaTest
     {
         [TestMethod]
         public void OrderWithin2Hours()
@@ -143,6 +144,49 @@ namespace PizzaStore.Test
             newloc.AddInventory("Pepperoni", 100);
             newloc.VerifySale(neworder, newcustomer);
             Assert.IsTrue(newcustomer.suggestOrder() != null);
+        }
+
+        [TestMethod]
+        public void TestDatabaseGetInventory()
+        {
+            Location newloc = new Location();
+            AdoReader newreader = new AdoReader();
+            List<Pizza> newpizzalist = new List<Pizza>();
+
+            newpizzalist = newreader.GetInventory();
+
+            foreach (var item in newpizzalist)
+            {
+                newloc.AddInventory(item.GetName(), item.Getnumberof());
+            }
+
+            Assert.IsTrue(newloc.GetInventory().Count > 0);
+        }
+        [TestMethod]
+        public void TestAddUser()
+        {
+            Location newloc = new Location();
+            AdoReader newreader = new AdoReader();
+
+            Assert.IsFalse(newreader.AddUser("Jacob", "dickbutt") == true);
+
+
+        }
+        [TestMethod]
+        public void TestAddSale()
+        {
+            AdoReader newreader = new AdoReader();
+
+            Assert.IsTrue(newreader.AddSale(newreader.GetLocationID("Pizza Jacob, Fake Road"), newreader.GetInventoryID("PepperoniSmallPan"), 10, 100.00f, newreader.GetCustomerID("Jacob")));
+
+        }
+        [TestMethod]
+        public void TestVerify()
+        {
+            AdoReader newreader = new AdoReader();
+
+            Assert.IsTrue(newreader.VerifyUserAccount("Jacob", "dickbutt"));
+
         }
     }
 }

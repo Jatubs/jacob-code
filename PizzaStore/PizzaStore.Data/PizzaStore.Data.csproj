@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{6A505CB0-A22A-4920-8C10-337FD88F9887}</ProjectGuid>
+    <ProjectGuid>{FAD7A50C-B5E4-45E2-A3FC-68F2626EF7FF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PizzaStore.Library</RootNamespace>
-    <AssemblyName>PizzaStore.Library</AssemblyName>
+    <RootNamespace>PizzaStore.Data</RootNamespace>
+    <AssemblyName>PizzaStore.Data</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,14 +40,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Order.cs" />
-    <Compile Include="Customer.cs" />
-    <Compile Include="Location.cs" />
-    <Compile Include="Pizza.cs" />
+    <Compile Include="AdoReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadata Include="Service References\" />
+    <ProjectReference Include="..\PizzaStore.Library\PizzaStore.Library.csproj">
+      <Project>{6A505CB0-A22A-4920-8C10-337FD88F9887}</Project>
+      <Name>PizzaStore.Library</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

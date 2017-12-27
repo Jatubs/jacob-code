@@ -9,21 +9,22 @@ namespace PizzaStore.Library
     public class Customer
     {
         
-        private string Name;
-        private string Address;
+       public string Name { get; set; }
+       public string Address { get; set; }
         private List<Order> history;
         private Location chosenlocation;
-        private static List<Order> currentorders;
+        public static List<Order> currentorders = new List<Order>();
         bool haschosen;
-        private string username;
-        private string password;
-        
+        public string username { get; set; }
+        public string password { get; set; }
+        public List<Pizza> fakeinventory { get; set; }
         public Customer()
         {
+            fakeinventory = new List<Pizza>();
             Name = "Balls Mahoney";
             Address = "1234 NoPizza Blvd";
             history = new List<Order>();
-            currentorders = new List<Order>();
+            
             haschosen = false;
             chosenlocation = new Location();
             chosenlocation.SetAddress("1235 NoPizza Blvd");

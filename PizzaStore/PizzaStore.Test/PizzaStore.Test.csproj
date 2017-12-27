@@ -50,13 +50,17 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="PizzaTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\PizzaStore.Data\PizzaStore.Data.csproj">
+      <Project>{fad7a50c-b5e4-45e2-a3fc-68f2626ef7ff}</Project>
+      <Name>PizzaStore.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PizzaStore.Library\PizzaStore.Library.csproj">
       <Project>{6a505cb0-a22a-4920-8c10-337fd88f9887}</Project>
       <Name>PizzaStore.Library</Name>

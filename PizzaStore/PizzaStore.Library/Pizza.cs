@@ -23,11 +23,12 @@ namespace PizzaStore.Library
         private int crusttype = 1;
         private int size = 2;
         private List<int> toppingslist;
-        private double price;
+        private int[] toppings2 = new int[5];
+        public double price { get; set; }
         private int orderhour;
         private int orderminutes;
-        private string pizzaname;
-
+        public  string pizzaname { get; set; }
+        private int numberof;
         public Pizza()
         {
             Enum.GetNames(typeof(Crusts)).ToString();
@@ -39,14 +40,73 @@ namespace PizzaStore.Library
             orderminutes = DateTime.Now.Minute;
             pizzaname = "Default";
         }
+        public List<int> ParseToppings(string toppings)
+        {
+            List<int> stringval = new List<int>();
+            string str = "This is a test";
+            str = toppings.Replace(" ", String.Empty);
+            str = str.Replace(",", String.Empty);
+            for (int i = 0; i < str.Length; i++)
+            {
+                stringval.Add(Convert.ToInt32(str[i]));
+            }
 
-        public Pizza(int crust, int pizzasize, double priceval)
+            return stringval;
+        }
+        public int ParseSize(string sizeval)
+        {
+            switch (sizeval)
+            {
+                case "Small":
+                    return (int)Sizes.Small;
+                case "Medium":
+                    return (int)Sizes.Medium;
+                case "Large":
+                    return (int)Sizes.Large;
+
+            }
+            return (int)Sizes.Medium;
+        }
+        public int ParseCrust(string crustval)
+        {
+            if (crustval == "Thin")
+            {
+                return 0;
+            }
+            else if (crustval == "Pan")
+            {
+                return 1;
+            }
+            else if (crustval == "Stuffed")
+            {
+                return 2;
+            }
+            else
+            {
+                return 1;
+            }
+        }
+        public Pizza(int crust, int pizzasize, double priceval, string name, string toppings)
         {
             crusttype = crust;
             size = pizzasize;
             price = priceval;
+            pizzaname = name;
+            toppingslist = ParseToppings(toppings);
         }
-
+        public Pizza(string name, string sizeval, string toppings, string crust, float priceval, string numberofval)
+        {
+            pizzaname = name;
+            size = ParseSize(sizeval);
+            toppingslist = ParseToppings(toppings);
+            numberof = Convert.ToInt32(numberofval);
+            price = (double)priceval;
+            crusttype = ParseCrust(crust);
+        }
+        public int Getnumberof()
+        {
+            return numberof;
+        }
         public void SetName(string type)
         {
             pizzaname = type;
